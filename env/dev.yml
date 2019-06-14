@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  web:
+    environment:
+      NODE_ENV: dev
+      START_FROM: web:debug
+  
+  ui:
+    environment:
+      NODE_ENV: dev

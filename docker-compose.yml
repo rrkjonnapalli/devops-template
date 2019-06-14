@@ -1,0 +1,36 @@
+version: '3.0'
+
+services: 
+  c-mongo:
+    build:
+      context: ../build/c-mongo
+    container_name: c-mongo
+    image: c-mongo
+    ports: 
+      - 49927:27017
+
+  c-redis:
+    build:
+      context: ../build/c-redis
+    container_name: c-redis
+    image: c-redis
+    ports: 
+      - 49926:6379
+
+  web:
+    build:
+      context: ../build/web
+    container_name: critique-web
+    image: critique-web
+    ports: 
+      - 8001:3000
+      - 9226:9226
+      - 9227:9227
+
+  ui:
+    build:
+      context: ../build/ui
+    container_name: critique-ui
+    image: critique-ui 
+    ports: 
+      - 8002:4200

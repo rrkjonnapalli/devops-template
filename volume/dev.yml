@@ -1,0 +1,17 @@
+version: '3.0'
+services:
+  web:
+    volumes:
+      - /home/ravikiran/critique/critique-web:/home/critique/web
+  
+  ui:
+    volumes:
+      - /home/ravikiran/critique/critique-ui:/home/critique/ui
+
+  c-mongo:
+    volumes: 
+      - /home/ravikiran/critique/mongo:/data/db
+  
+  c-redis:
+    volumes: 
+      - /home/ravikiran/critique/redis:/data
