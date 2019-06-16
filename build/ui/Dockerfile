@@ -8,6 +8,6 @@ RUN npm i -g @angular/cli@8.0.0
 
 RUN npm install
 
-ENTRYPOINT [ "npm" "start" $START_FROM ]
-
 EXPOSE 4200
+
+CMD [ "./node_modules/.bin/http-server", "-p", "4200", "."]
