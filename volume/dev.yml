@@ -2,16 +2,20 @@ version: '3.0'
 services:
   web:
     volumes:
-      - /home/ravikiran/critique/critique-web:/home/critique/web
+      - /Users/vivek/workspace/devops-template/web:/home/critique/web
   
   ui:
     volumes:
-      - /home/ravikiran/critique/critique-ui:/home/critique/ui
+      - /Users/vivek/workspace/devops-template/ui:/home/critique/ui
 
   c-mongo:
     volumes: 
-      - /home/ravikiran/critique/mongo:/data/db
+      - /Users/vivek/workspace/devops-template/mongo:/data/db
   
   c-redis:
     volumes: 
-      - /home/ravikiran/critique/redis:/data
+      - /Users/vivek/workspace/devops-template/redis:/data
+  
+  c-kafka:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

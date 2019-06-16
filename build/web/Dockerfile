@@ -6,8 +6,9 @@ RUN npm i -g npm@6.9.0
 
 RUN npm install
 
-ENTRYPOINT [ "npm" "start" $START_FROM ]
+RUN node --version
 
-EXPOSE 3000
+EXPOSE $PORT
 EXPOSE 9226
 EXPOSE 9227
+CMD [ "node", "index.js" ]

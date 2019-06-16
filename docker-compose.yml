@@ -3,7 +3,7 @@ version: '3.0'
 services: 
   c-mongo:
     build:
-      context: ../build/c-mongo
+      context: ./build/c-mongo
     container_name: c-mongo
     image: c-mongo
     ports: 
@@ -11,7 +11,7 @@ services:
 
   c-redis:
     build:
-      context: ../build/c-redis
+      context: ./build/c-redis
     container_name: c-redis
     image: c-redis
     ports: 
@@ -19,18 +19,47 @@ services:
 
   web:
     build:
-      context: ../build/web
+      context: ./build/web
     container_name: critique-web
     image: critique-web
     ports: 
       - 8001:3000
       - 9226:9226
       - 9227:9227
+    environment:
+      PORT: 4545
+      MONGODB_URL: mongodb://c-mongo:27017
+      REDIS_URL: redis://c-redis:6379
+      KAFKA_URL: kafka://192.168.0.105:9092
+      KAFKA_TOPIC: kafkatest
+    depends_on:
+      - c-mongo
+      - c-redis
+      - c-kafka
 
   ui:
     build:
-      context: ../build/ui
+      context: ./build/ui
     container_name: critique-ui
     image: critique-ui 
     ports: 
       - 8002:4200
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+  
+  c-kafka:
+    build:
+      context: ./build/c-kafka
+    container_name: c-kafka
+    image: c-kafka
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_CREATE_TOPICS: "kafkatest:1:1"
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.0.105
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    depends_on:
+      - zookeeper
